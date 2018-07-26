@@ -1,11 +1,12 @@
-package br.com.zero.grau.zerograu;
+package br.com.zerograu;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"br.com.zerograu.domain"})
+@RestController
 public class ZerograuApplication {
 
 	public static void main(String[] args) {

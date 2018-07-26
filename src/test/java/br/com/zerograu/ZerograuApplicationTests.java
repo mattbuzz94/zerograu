@@ -1,4 +1,4 @@
-package br.com.zero.grau.zerograu;
+package br.com.zerograu;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

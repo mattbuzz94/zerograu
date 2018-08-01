@@ -7,61 +7,65 @@ import java.math.BigDecimal;
 public class Produto {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id_produto;
+    @Column (name = "id_produto")
+    private Integer idProduto;
 
-    @Column
-    private String desc_produto;
+    @Column (name = "desc_produto")
+    private String descProduto;
 
-    @Column
-    private BigDecimal preco_compra;
+    @Column (name = "preco_compra")
+    private Double precoCompra;
 
-    @Column
-    private BigDecimal preco_venda;
+    @Column (name = "preco_venda")
+    private Double precoVenda;
 
-    @Column
-    private int qtd_estoque;
+    @Column (name = "qtd_estoque")
+    private int qtdEstoque;
 
+    @Column (name = "cod_barra")
+    private int codigoBarras;
+    
     @Column
     private String imageUrl;
 
-    public Integer getId_produto() {
-        return id_produto;
+    public Integer getIdProduto() {
+        return idProduto;
     }
 
-    public void setId_produto(Integer id_produto) {
-        this.id_produto = id_produto;
+    public void setIdProduto(Integer idProduto) {
+        this.idProduto = idProduto;
     }
 
-    public String getDesc_produto() {
-        return desc_produto;
+    public String getDescProduto() {
+        return descProduto;
     }
 
-    public void setDesc_produto(String desc_produto) {
-        this.desc_produto = desc_produto;
+    public void setDescProduto(String descProduto) {
+        this.descProduto = descProduto;
     }
 
-    public BigDecimal getPreco_compra() {
-        return preco_compra;
+    public Double getPrecoCompra() {
+        return precoCompra;
     }
 
-    public void setPreco_compra(BigDecimal preco_compra) {
-        this.preco_compra = preco_compra;
+    public void setPrecoCompra(Double precoCompra) {
+        this.precoCompra = precoCompra;
     }
 
-    public BigDecimal getPreco_venda() {
-        return preco_venda;
+    public Double getPrecoVenda() {
+        return precoVenda;
     }
 
-    public void setPreco_venda(BigDecimal preco_venda) {
-        this.preco_venda = preco_venda;
+    public void setPrecoVenda(Double precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
-    public int getQtd_estoque() {
-        return qtd_estoque;
+    public int getQtdEstoque() {
+        return qtdEstoque;
     }
 
-    public void setQtd_estoque(int qtd_estoque) {
-        this.qtd_estoque = qtd_estoque;
+    public void setQtdEstoque(int qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
     }
 
     public String getImageUrl() {
@@ -71,4 +75,13 @@ public class Produto {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public int getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    public void setCodigoBarras(int codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
+
 }

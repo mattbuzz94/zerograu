@@ -1,7 +1,6 @@
 package br.com.zerograu.domain;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 public class Item {
@@ -25,6 +24,10 @@ public class Item {
 
     @OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Produto product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_venda", referencedColumnName = "id_venda")
+    private Venda venda;
 
     public Integer getId() {
         return id;
@@ -72,5 +75,35 @@ public class Item {
 
     public void setProduct(Produto product) {
         this.product = product;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        setVenda(venda, true);
+    }
+
+    void setVenda(Venda venda1, boolean add) {
+        this.venda = venda1;
+        if (venda1 != null && add) {
+            venda1.addItem(this, false);
+        }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Item))
+            return false;
+
+        final Item item = (Item) object;
+
+        if (id != null && item.getId() != null) {
+            return id.equals(item.getId());
+        }
+        return false;
     }
 }

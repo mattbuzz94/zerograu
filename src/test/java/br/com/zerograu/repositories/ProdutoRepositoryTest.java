@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +99,7 @@ public class ProdutoRepositoryTest {
         double valorTotalVenda=0;
 
         Venda venda = new Venda();
-        List<Item> items = new ArrayList<>();
+        ArrayList<Item> items = new ArrayList<>();
 
         Item item1 = new Item();
         item1.setProduct(produtosList.get(0));
@@ -108,7 +108,7 @@ public class ProdutoRepositoryTest {
         item1.setTotalPrice(precoTotalItem1);
         items.add(item1);
 
-        itemService.saveOrUpdate(item1);
+        //itemService.saveOrUpdate(item1);
 
         Item item2 = new Item();
         item2.setProduct(produtosList.get(1));
@@ -117,14 +117,24 @@ public class ProdutoRepositoryTest {
         item2.setTotalPrice(precoTotalItem2);
         items.add(item2);
 
-        itemService.saveOrUpdate(item2);
+        //itemService.saveOrUpdate(item2);
 
         for (Item item :items) {
             valorTotalVenda += item.getTotalPrice();
         }
 
+        Item itempersisted;
+
         venda.setValorTotal(valorTotalVenda);
         venda.setItems(items);
+
+        int x = 0;
+        while (x < venda.geItems().size()) {
+            itempersisted = venda.geItems().get(x);
+            itempersisted.setVenda(venda);
+            x++;
+        }
+        vendaService.saveOrUpdate(venda);
 
         //then
         Assert.assertNotNull(item1.getId());

@@ -1,5 +1,7 @@
 package br.com.zerograu.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Venda {
     @Id
@@ -20,6 +23,7 @@ public class Venda {
     //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //private List<Item> items;
 
+    @JsonManagedReference
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "venda")
     @Fetch(FetchMode.JOIN)
     private List<Item> item = new ArrayList<Item>();

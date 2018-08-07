@@ -1,8 +1,10 @@
 package br.com.zerograu.domain;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Produto {
     @Id

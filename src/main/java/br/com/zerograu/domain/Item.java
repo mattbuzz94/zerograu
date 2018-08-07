@@ -1,7 +1,11 @@
 package br.com.zerograu.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Item {
 
@@ -25,6 +29,7 @@ public class Item {
     @OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Produto product;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_venda", referencedColumnName = "id_venda")
     private Venda venda;

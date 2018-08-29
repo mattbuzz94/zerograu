@@ -20,9 +20,6 @@ public class Venda {
     @Column (name = "valor_total")
     private double valorTotal;
 
-    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //private List<Item> items;
-
     @JsonManagedReference
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "venda")
     @Fetch(FetchMode.JOIN)

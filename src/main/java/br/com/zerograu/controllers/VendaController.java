@@ -29,7 +29,7 @@ public class VendaController {
         return "redirect:/venda/list";
     }
 
-    @RequestMapping(value = "/venda/list", method = RequestMethod.GET)
+    @GetMapping(value = "/venda/list")
     public ResponseEntity<List<Venda>> listAllVendas() {
         List<Venda> vendas = vendaService.listAll();
         if (vendas.isEmpty()) {
@@ -39,7 +39,7 @@ public class VendaController {
         return new ResponseEntity<>(vendas, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/venda/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/venda/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Venda> getVenda(@PathVariable("id") Integer id) {
         System.out.println("Fetching Venda with id " + id);
         Venda venda = vendaService.getById(id);
@@ -51,7 +51,7 @@ public class VendaController {
     }
 
     // --------------------- CREATE --------------------------------------------------
-    @RequestMapping(value = "/venda/", method = RequestMethod.POST)
+    @PostMapping(value = "/venda/")
     public ResponseEntity<Void> createVenda(@RequestBody Venda venda, UriComponentsBuilder ucBuilder) {
         System.out.println("Criando o Venda " + venda.getIdVenda());
         Double valorTotalVenda = 0.00;
@@ -80,7 +80,7 @@ public class VendaController {
     }
 
     // ------------------- Update a Venda
-    @RequestMapping(value = "/venda/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/venda/{id}")
     public ResponseEntity<Venda> updateVenda(@PathVariable("id") Integer id, @RequestBody Venda venda) {
         System.out.println("Atualizando o Venda " + id);
 
@@ -98,7 +98,7 @@ public class VendaController {
 
     // ------------------- Delete a Venda
     // --------------------------------------------------------
-    @RequestMapping(value = "/venda/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/venda/{id}")
     public ResponseEntity<Venda> deleteVenda(@PathVariable("id") Integer id) {
         System.out.println("Buscando & Deletando o Venda com o id " + id);
 

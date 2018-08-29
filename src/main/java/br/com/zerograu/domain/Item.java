@@ -34,6 +34,11 @@ public class Item {
     @JoinColumn(name = "id_venda", referencedColumnName = "id_venda")
     private Venda venda;
 
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_comanda", referencedColumnName = "id_comanda")
+    private Comanda comanda;
+
     public Integer getId() {
         return id;
     }
@@ -90,10 +95,25 @@ public class Item {
         setVenda(venda, true);
     }
 
+    public Comanda getComanda() {
+        return comanda;
+    }
+
+    public void setComanda(Comanda comanda) {
+        setComanda(comanda, true);
+    }
+
     void setVenda(Venda venda1, boolean add) {
         this.venda = venda1;
         if (venda1 != null && add) {
             venda1.addItem(this, false);
+        }
+    }
+
+    void setComanda(Comanda comanda, boolean add) {
+        this.comanda = comanda;
+        if (comanda != null && add) {
+            comanda.addItem(this, false);
         }
     }
 

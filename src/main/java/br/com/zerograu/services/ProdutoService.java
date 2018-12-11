@@ -3,7 +3,6 @@ package br.com.zerograu.services;
 import br.com.zerograu.domain.Produto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProdutoService {
 
@@ -15,5 +14,5 @@ public interface ProdutoService {
 
     void delete(Integer id);
 
-    List<Produto> retornaBusca(String textoBusca, String projetoBusca);
+    List<Produto> retornaBusca(String descProduto, Integer codigoBarras);
 }

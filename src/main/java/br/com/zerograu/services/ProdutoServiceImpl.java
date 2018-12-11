@@ -12,7 +12,6 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -71,27 +70,21 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<Produto> retornaBusca(String textoBusca, String projetoBusca) {
+    public List<Produto> retornaBusca(String descProduto, Integer codigoBarras) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Produto> cquery = criteriaBuilder.createQuery(Produto.class);
         Root<Produto> root = cquery.from(Produto.class);
 
-        Path<String> projetoPath = root.get("projeto");
-        Path<String> tituloProdutoPath = root.get("tituloProduto");
-        Path<String> descricaoProdutoPath = root.get("descricaoProduto");
-        Path<String> solucaoPropostaPath = root.get("solucaoProposta");
-        Path<String> comentarioInternoPath = root.get("comentarioInterno");
+        Path<Integer> codigoBarrasPath = root.get("codigoBarras");
+        Path<String> descProdutoPath = root.get("descProduto");
 
-        Predicate tituloLike = criteriaBuilder.like(criteriaBuilder.upper(tituloProdutoPath), "%" + textoBusca.toUpperCase() + "%");
-        Predicate descricaoLike = criteriaBuilder.like(criteriaBuilder.upper(descricaoProdutoPath), "%" + textoBusca.toUpperCase() + "%");
-        Predicate solucaoLike = criteriaBuilder.like(criteriaBuilder.upper(solucaoPropostaPath), "%" + textoBusca.toUpperCase() + "%");
-        Predicate comentarioLike = criteriaBuilder.like(criteriaBuilder.upper(comentarioInternoPath), "%" + textoBusca.toUpperCase() + "%");
-        Predicate projetoLike = criteriaBuilder.like(criteriaBuilder.upper(projetoPath), "%" + projetoBusca.toUpperCase() + "%");
+        Predicate descProdutoLike = criteriaBuilder.like(criteriaBuilder.upper(descProdutoPath), "%" + descProduto.toUpperCase() + "%");
+        Predicate codigoBarrasLike = criteriaBuilder.equal(codigoBarrasPath, codigoBarras);
 
 
-        cquery.where(criteriaBuilder.and(projetoLike,
-                criteriaBuilder.or(descricaoLike, solucaoLike, tituloLike, comentarioLike)));
+        cquery.where(criteriaBuilder.and(codigoBarrasLike,
+                criteriaBuilder.or(descProdutoLike)));
 
         return entityManager.createQuery(cquery).getResultList();
     }

@@ -25,22 +25,19 @@ public class ProdutoController {
     }
 
     @GetMapping(value = "/produto/busca")
-    public ResponseEntity<List<Produto>> getProduto(@RequestParam("textoBusca") String textoBusca,
-                                                    @RequestParam("modulo") String modulo) {
-        String textoBuscaDecoded = null;
-        String moduloDecoded = null;
+    public ResponseEntity<List<Produto>> getProduto(@RequestParam("descProduto") String descProduto,
+                                                    @RequestParam("codigoBarras") Integer codigoBarras) {
+        String descProdutoDecoded = null;
         try {
-            textoBuscaDecoded = java.net.URLDecoder.decode(textoBusca, "UTF-8");
-            moduloDecoded = java.net.URLDecoder.decode(modulo, "UTF-8");
+            descProdutoDecoded = java.net.URLDecoder.decode(descProduto, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println(textoBuscaDecoded);
-        System.out.println(moduloDecoded);
-        List<Produto> produtos = produtoService.retornaBusca(textoBuscaDecoded, moduloDecoded);
+        System.out.println(descProdutoDecoded);
+        System.out.println(codigoBarras);
+        List<Produto> produtos = produtoService.retornaBusca(descProdutoDecoded, codigoBarras);
         if (produtos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);// You many decide to return
-            // HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<>(produtos, HttpStatus.OK);
     }
@@ -73,11 +70,11 @@ public class ProdutoController {
     // --------------------- CREATE --------------------------------------------------
     @PostMapping(value = "/produto/")
     public ResponseEntity<Void> createProduto(@RequestBody Produto produto, UriComponentsBuilder ucBuilder) {
-        System.out.println("Criando o Produto " + produto.getIdProduto());
+        System.out.println("Criando o Produto ");
 
         /*
          * if (produtoService.isProdutoExist(produto)) {
-         * System.out.println("A Produto with name " + produto.getNomeProduto() +
+         * System.out.println("A Produto with name " + produto.getdescProduto() +
          * " already exist"); return new ResponseEntity<Void>(HttpStatus.CONFLICT); }
          */
         produtoService.saveOrUpdate(produto);
@@ -99,7 +96,7 @@ public class ProdutoController {
         }
         currentProduto.setIdProduto(produto.getIdProduto());
 
-        produtoService.saveOrUpdate(currentProduto);
+        produtoService.saveOrUpdate(produto);
         return new ResponseEntity<>(currentProduto, HttpStatus.OK);
     }
     // ------------------- Delete a Produto

@@ -52,12 +52,10 @@ public class ProdutoRepositoryTest {
         //given
         Produto produto = new Produto();
         produto.setDescProduto(produto_DESCRIPTION);
-        produto.setImageUrl(IMAGE_URL);
         produto.setPrecoVenda(BIG_DECIMAL_100);
 
         Produto produto2 = new Produto();
         produto2.setDescProduto(produto_DESCRIPTION2);
-        produto2.setImageUrl(IMAGE_URL2);
         produto2.setPrecoVenda(BIG_DECIMAL_100_2);
 
         //when
@@ -70,7 +68,6 @@ public class ProdutoRepositoryTest {
         Assert.assertEquals((Integer) 1, produto1.getIdProduto());
         Assert.assertEquals(produto_DESCRIPTION, produto1.getDescProduto());
         Assert.assertEquals(BIG_DECIMAL_100.compareTo(produto1.getPrecoVenda()), 0);
-        Assert.assertEquals(IMAGE_URL, produto1.getImageUrl());
 
     }
 
@@ -79,12 +76,10 @@ public class ProdutoRepositoryTest {
 
         Produto produto = new Produto();
         produto.setDescProduto(produto_DESCRIPTION);
-        produto.setImageUrl(IMAGE_URL);
         produto.setPrecoVenda(BIG_DECIMAL_100);
 
         Produto produto2 = new Produto();
         produto2.setDescProduto(produto_DESCRIPTION2);
-        produto2.setImageUrl(IMAGE_URL2);
         produto2.setPrecoVenda(BIG_DECIMAL_100_2);
 
         List<Produto> produtosList = new ArrayList<>();

@@ -26,9 +26,6 @@ public class Produto {
 
     @Column (name = "cod_barra")
     private int codigoBarras;
-    
-    @Column
-    private String imageUrl;
 
     public Integer getIdProduto() {
         return idProduto;
@@ -68,14 +65,6 @@ public class Produto {
 
     public void setQtdEstoque(int qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public int getCodigoBarras() {

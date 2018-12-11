@@ -20,6 +20,10 @@ public class Venda {
     @Column (name = "valor_total")
     private double valorTotal;
 
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
+
+
     @JsonManagedReference
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "venda")
     @Fetch(FetchMode.JOIN)
@@ -39,6 +43,14 @@ public class Venda {
 
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public List<Item> geItems() {
